@@ -1,0 +1,21 @@
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        change={5:0,10:0}
+        for amt in bills:
+            if amt==5:
+                change[5]+=1
+            elif amt==10:
+                if change[5]==0:
+                    return False
+                change[5]-=1
+                change[10]+=1
+            else:
+                if change[10]>0 and change[5]>0:
+                    change[10]-=1
+                    change[5]-=1
+                elif change[5]>=3:
+                    change[5]-=3
+                else:
+                    return False
+        return True
+        #can also make use of variable five,ten instead of using a dict
